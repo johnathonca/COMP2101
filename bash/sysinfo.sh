@@ -9,11 +9,12 @@ source /etc/os-release
 
 #variable for ip
 ip=$(hostname -I)
-#making template
+
 
 #variable for freespace in root system
 freespace=$(df -h --output=avail / | grep Avail -v)
 
+#template
 cat <<eof
 
 Report lab 2 for $HOSTNAME

@@ -1,19 +1,26 @@
 #!/bin/bash
-#Every blank echo is a space for tidiness
 
-#Print out the FQDN infomation
-echo FQDN: $(hostname)
+#gathering data
+#create variable for hostname
+fqdn=$(hostname -f)
 
-echo  
-#Host info
-echo  host info: 
-hostnamectl
+#variable for operating system and version
+source /etc/os-release
 
-echo  
-echo IP address:
-hostname -I
+#variable for ip
+ip=$(hostname -I)
+#making template
 
-echo  
-#Display space available in root filesystem
-echo Rootfile System Status:
-df ~/COMP2101/bash -BG
+#variable for freespace in root system
+freespace=$(df -h --output=avail / | grep Avail -v)
+
+cat <<eof
+
+Report lab 2 for $HOSTNAME
+==============
+FQDN: $fqdn
+Operating System name and version: $PRETTY_NAME
+IP Address: $ip
+Root Filesystem Free Space: $freespace
+==============
+eof
